@@ -25,12 +25,25 @@ loader
   .add("images/cat.png")
   .load(setup);
 
+//Predefining the cat so it can be used in both setup and gameloop
+let cat;
+
 //This `setup` function will run when the image has loaded
 function setup() {
 
   //Create the cat sprite
-  let cat = new Sprite(resources["images/cat.png"].texture);
+  cat = new Sprite(resources["images/cat.png"].texture);
 
   //Add the cat to the stage
   app.stage.addChild(cat);
+
+  //Add the gameloop function to the ticker, which will run it 60 times a second
+  app.ticker.add(delta => gameLoop(delta));
 }
+
+//The gameLoop function which will contain anything I want to animate
+//Everything in here will happen once every frame
+const gameLoop = (delta) => {
+  cat.x += 1 + delta;
+  cat.y += 1 + delta;
+};
